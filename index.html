@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Agrogestore</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <header>
+    <h1>Agrogestore</h1>
+    <nav>
+      <button class="tab-button active" data-tab="financial">Financeiro</button>
+      <button class="tab-button" data-tab="grain">Gestão de Grãos</button>
+      <button class="tab-button" data-tab="crop">Planejamento de Safras</button>
+      <button class="tab-button" data-tab="weather">Monitoramento Climático</button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Financeiro -->
+    <section class="tab-content active" id="financial">
+      <h2>Movimentações Financeiras</h2>
+      <form id="financial-form" class="form-row">
+        <select id="type" required>
+          <option value="" disabled selected>Tipo</option>
+          <option value="entrada">Entrada</option>
+          <option value="saida">Saída</option>
+        </select>
+        <input type="date" id="date" required />
+        <input type="text" id="description" placeholder="Descrição" required />
+        <select id="category" required>
+          <option value="" disabled selected>Categoria</option>
+          <option value="venda">Venda</option>
+          <option value="compra">Compra</option>
+          <option value="salario">Salário</option>
+          <option value="outros">Outros</option>
+        </select>
+        <button type="submit">Adicionar</button>
+      </form>
+
+      <div class="filter-row">
+        <label for="filter-type">Filtro:</label>
+        <select id="filter-type">
+          <option value="todos" selected>Todos</option>
+          <option value="entrada">Entradas</option>
+          <option value="saida">Saídas</option>
+        </select>
+      </div>
+
+      <table id="financial-table">
+        <thead>
+          <tr>
+            <th>Tipo</th>
+            <th>Data</th>
+            <th>Descrição</th>
+            <th>Categoria</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Entries will appear here -->
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Gestão de Grãos -->
+    <section class="tab-content" id="grain">
+      <h2>Gestão de Grãos e Insumos</h2>
+      <form id="grain-form" class="form-row">
+        <input type="text" id="grain-name" placeholder="Nome do insumo" required />
+        <input type="number" id="grain-quantity" placeholder="Quantidade" min="0" required />
+        <input type="number" id="grain-threshold" placeholder="Alerta mínimo" min="0" required />
+        <button type="submit">Adicionar / Atualizar</button>
+      </form>
+      <table id="grain-table">
+        <thead>
+          <tr>
+            <th>Insumo</th>
+            <th>Quantidade</th>
+            <th>Alerta Mínimo</th>
+            <th>Status</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Grain items listed here -->
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Planejamento de Safras -->
+    <section class="tab-content" id="crop">
+      <h2>Planejamento de Safras</h2>
+      <div id="calendar-container">
+        <button id="prev-month">&lt;</button>
+        <h3 id="calendar-month-year"></h3>
+        <button id="next-month">&gt;</button>
+        <table id="calendar">
+          <thead>
+            <tr>
+              <th>Dom</th>
+              <th>Seg</th>
+              <th>Ter</th>
+              <th>Qua</th>
+              <th>Qui</th>
+              <th>Sex</th>
+              <th>Sáb</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Calendar grid -->
+          </tbody>
+        </table>
+      </div>
+      <div id="event-form-container" class="hidden">
+        <h4>Adicionar Evento</h4>
+        <form id="event-form">
+          <input type="date" id="event-date" required />
+          <input type="text" id="event-title" placeholder="Título do evento" required />
+          <select id="event-type" required>
+            <option value="" disabled selected>Tipo de evento</option>
+            <option value="plantio">Plantio</option>
+            <option value="manejo">Manejo</option>
+            <option value="colheita">Colheita</option>
+          </select>
+          <button type="submit">Salvar</button>
+          <button type="button" id="cancel-event">Cancelar</button>
+        </form>
+      </div>
+      <div id="events-list">
+        <h4>Eventos</h4>
+        <ul id="events-ul">
+          <!-- Events will be listed here -->
+        </ul>
+      </div>
+    </section>
+
+    <!-- Monitoramento Climático -->
+    <section class="tab-content" id="weather">
+      <h2>Monitoramento Climático</h2>
+      <iframe src="https://www.meteoblue.com/pt/tempo/mapas/widget/horizontina_brasil_3461659?windAnimation=1&gust=1&satellite=1&cloudsAndPrecipitation=1&temperature=1&sunshine=1&extremeForecastIndex=1&geoloc=fixed&tempunit=C&windunit=km%252Fh&lengthunit=metric&zoom=5&autowidth=manu"  frameborder="0" scrolling="NO" allowtransparency="true" sandbox="allow-same-origin allow-scripts allow-popups allow-popups-to-escape-sandbox" style="width: 890px; height: 670px"></iframe><div><!-- DO NOT REMOVE THIS LINK --><a href="https://www.meteoblue.com/pt/tempo/mapas/horizontina_brasil_3461659?utm_source=map_widget&utm_medium=linkus&utm_content=map&utm_campaign=Weather%2BWidget" target="_blank" rel="noopener">meteoblue</a></div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Agrogestore</p>
+  </footer>
+</body>
+</html>
+
