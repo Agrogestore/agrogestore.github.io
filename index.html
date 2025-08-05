@@ -21,44 +21,50 @@
   <main>
     <!-- Financeiro -->
     <section class="tab-content active" id="financial">
-      <h2>Movimentações Financeiras</h2>
-      <form id="financial-form" class="form-row">
-        <select id="type" required>
-          <option value="" disabled selected>Tipo</option>
-          <option value="entrada">Entrada</option>
-          <option value="saida">Saída</option>
-        </select>
-        <input type="date" id="date" required />
-        <input type="text" id="description" placeholder="Descrição" required />
-        <select id="category" required>
-          <option value="" disabled selected>Categoria</option>
-          <option value="venda">Venda</option>
-          <option value="compra">Compra</option>
-          <option value="salario">Salário</option>
-          <option value="outros">Outros</option>
-        </select>
-        <button type="submit">Adicionar</button>
-      </form>
+  <h2>Movimentações Financeiras</h2>
+  <form id="financial-form" class="form-row">
+    <select id="type" required>
+      <option value="" disabled selected>Tipo</option>
+      <option value="entrada">Entrada</option>
+      <option value="saida">Saída</option>
+    </select>
+    <input type="date" id="date" required />
+    <input type="text" id="description" placeholder="Descrição" required />
+    <input type="text" id="value" placeholder="Valor" required />
+    <select id="category" required>
+      <option value="" disabled selected>Categoria</option>
+      <option value="venda">Venda</option>
+      <option value="compra">Compra</option>
+      <option value="salario">Salário</option>
+      <option value="outros">Outros</option>
+    </select>
 
-      <div class="filter-row">
-        <label for="filter-type">Filtro:</label>
-        <select id="filter-type">
-          <option value="todos" selected>Todos</option>
-          <option value="entrada">Entradas</option>
-          <option value="saida">Saídas</option>
-        </select>
-      </div>
+    <!-- NOVO CAMPO para descrição de "Outros" -->
+    <input type="text" id="other-category-description" placeholder="Descreva a categoria" style="display: none;" />
 
-      <table id="financial-table">
-        <thead>
-          <tr>
-            <th>Tipo</th>
-            <th>Data</th>
-            <th>Descrição</th>
-            <th>Categoria</th>
-          </tr>
-        </thead>
-        <tbody>
+    <button type="submit">Adicionar</button>
+  </form>
+
+  <div class="filter-row">
+    <label for="filter-type">Filtro:</label>
+    <select id="filter-type">
+      <option value="todos" selected>Todos</option>
+      <option value="entrada">Entradas</option>
+      <option value="saida">Saídas</option>
+    </select>
+  </div>
+
+  <table id="financial-table">
+    <thead>
+      <tr>
+        <th>Tipo</th>
+        <th>Data</th>
+        <th>Descrição</th>
+        <th>Categoria</th>
+        <th>Valor</th>
+      </tr>
+    </thead>
+    <tbody>
           <!-- Entries will appear here -->
         </tbody>
       </table>
