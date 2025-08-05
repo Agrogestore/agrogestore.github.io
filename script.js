@@ -17,9 +17,24 @@ tabButtons.forEach(button => {
 });
 
 // ---- Financial Movements Logic ----
+// ---- Financial Movements Logic ----
 const financialForm = document.getElementById('financial-form');
 const financialTableBody = document.querySelector('#financial-table tbody');
 const filterTypeSelect = document.getElementById('filter-type');
+
+const categorySelect = document.getElementById('category');
+const otherCategoryInput = document.getElementById('other-category-description');
+
+// Mostrar ou ocultar campo extra se "outros" for selecionado
+categorySelect.addEventListener('change', () => {
+  if (categorySelect.value === 'outros') {
+    otherCategoryInput.style.display = 'block';
+    otherCategoryInput.setAttribute('required', 'required');
+  } else {
+    otherCategoryInput.style.display = 'none';
+    otherCategoryInput.removeAttribute('required');
+  }
+});
 
 let financialMovements = JSON.parse(localStorage.getItem('financialMovements')) || [];
 
@@ -44,14 +59,23 @@ financialForm.addEventListener('submit', e => {
   const type = document.getElementById('type').value;
   const date = document.getElementById('date').value;
   const description = document.getElementById('description').value.trim();
-  const category = document.getElementById('category').value;
   const value = document.getElementById('value').value.trim();
 
-  if (!type || !date || !description || !category|| !value) return;
+  let category = document.getElementById('category').value;
+  const otherCategory = otherCategoryInput.value.trim();
+
+  if (!type || !date || !description || !category || !value) return;
+
+  // Se "Outros", usa a descrição personalizada
+  if (category === 'outros') {
+    if (!otherCategory) return; // segurança extra
+    category = `Outros: ${otherCategory}`;
+  }
 
   financialMovements.push({ type, date, description, category, value });
   localStorage.setItem('financialMovements', JSON.stringify(financialMovements));
   financialForm.reset();
+  otherCategoryInput.style.display = 'none'; // esconde campo extra
   renderFinancialMovements(filterTypeSelect.value);
 });
 
